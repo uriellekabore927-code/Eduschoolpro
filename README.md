@@ -63,14 +63,14 @@ php -S localhost:8000
 
 ## Comptes de démonstration
 
-| Rôle                  | Email                            | Mot de passe  |
-|-----------------------|----------------------------------|---------------|
-| Administrateur        | admin@campusflow.local           | Campus@2026   |
-| Enseignant            | enseignant@campusflow.local      | Campus@2026   |
-| Enseignant            | mariam@campusflow.local          | Campus@2026   |
-| Délégué de classe     | delegue@campusflow.local         | Campus@2026   |
-| Surveillant général   | surveillant@campusflow.local     | Campus@2026   |
-| Responsable comptable | comptable@campusflow.local       | Campus@2026   |
+| Rôle                  | Email                    | Mot de passe  |
+|-----------------------|--------------------------|---------------|
+| Administrateur        | admin@campusflow.local   | Campus@2026   |
+| Enseignant            | enseignant@test.com      | Campus@2026   |
+| Délégué de classe     | delegue@test.com         | Campus@2026   |
+| Surveillant général   | surveillant@test.com     | Campus@2026   |
+| Responsable comptable | comptable@test.com       | Campus@2026   |
+| Étudiant              | etudiant@test.com        | Campus@2026   |
 
 ## Principaux endpoints API
 
