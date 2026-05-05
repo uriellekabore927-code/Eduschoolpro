@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EduSchedule Pro | Dashboard</title>
+    <link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/vendor/bootstrap-icons/font/bootstrap-icons.min.css" />
+    <link rel="stylesheet" href="assets/css/style.css?v=4" />
+    <link rel="stylesheet" href="assets/css/theme.css" />
+  </head>
+  <body class="app-shell" data-page="dashboard">
+    <div data-app-shell></div>
+    <div data-page-content class="d-none">
+      <section class="dashboard-hero mb-4">
+        <h2 id="dashboardRoleTitle">Tableau de bord</h2>
+        <p id="dashboardRoleSubtitle">Vue d’ensemble des activités de l’établissement.</p>
+      </section>
+
+      <section class="dashboard-kpi-grid mb-4" id="dashboardKpis"></section>
+
+      <!-- Charts row -->
+      <section class="row g-4 mb-4">
+        <div class="col-xl-5">
+          <div class="surface-card dashboard-panel h-100">
+            <div class="dashboard-panel-head">
+              <div>
+                <h3>Heures planifiées vs réalisées</h3>
+                <p>Semaine en cours</p>
+              </div>
+            </div>
+            <div id="dashboardHoursChart"></div>
+            <div class="hours-chart-legend" id="dashboardHoursLegend"></div>
+          </div>
+        </div>
+
+        <div class="col-xl-3">
+          <div class="surface-card dashboard-panel h-100">
+            <div class="dashboard-panel-head">
+              <div>
+                <h3>Avancement des programmes</h3>
+                <p>Vue synthétique</p>
+              </div>
+            </div>
+            <div class="dashboard-donut-block">
+              <div class="donut-chart" id="dashboardProgramDonut"></div>
+              <div class="donut-center-text">
+                <strong id="dashboardProgramDonutValue">0%</strong>
+                <span>Moyenne</span>
+              </div>
+            </div>
+            <div class="donut-legend" id="dashboardProgramSummary"></div>
+          </div>
+        </div>
+
+        <div class="col-xl-4">
+          <div class="surface-card dashboard-panel h-100">
+            <div class="dashboard-panel-head">
+              <div>
+                <h3>Répartition des retards</h3>
+                <p>Par classe</p>
+              </div>
+            </div>
+            <div class="dashboard-donut-block">
+              <div class="donut-chart donut-chart-secondary" id="dashboardDelayDonut"></div>
+              <div class="donut-center-text">
+                <strong id="dashboardDelayDonutValue">0</strong>
+                <span>Retards</span>
+              </div>
+            </div>
+            <div class="donut-legend" id="dashboardDelaySummary"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Alertes + Actions rapides -->
+      <section class="row g-4">
+        <div class="col-xl-8">
+          <div class="surface-card dashboard-panel">
+            <div class="dashboard-panel-head mb-3" style="display:flex;align-items:flex-start;justify-content:space-between;">
+              <div>
+                <h3>Séances du jour</h3>
+                <p>État des cours en temps réel</p>
+              </div>
+              <a href="emploi-temps.html" class="btn btn-outline-primary btn-sm">
+                <i class="bi bi-calendar3 me-1"></i>Emploi du temps
+              </a>
+            </div>
+            <div id="dashboardTodaySessions">
+              <div class="text-muted-soft text-center py-4" style="font-size:.9rem;">
+                <i class="bi bi-hourglass-split d-block mb-2" style="font-size:1.5rem;opacity:.35;"></i>
+                Chargement des données…
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xl-4">
+          <div class="surface-card dashboard-panel">
+            <div class="dashboard-panel-head mb-3">
+              <div>
+                <h3>Actions prioritaires</h3>
+                <p>À traiter maintenant</p>
+              </div>
+            </div>
+            <div id="dashboardPriorityActions">
+              <div class="text-muted-soft text-center py-4" style="font-size:.9rem;">
+                <i class="bi bi-check-circle d-block mb-2" style="font-size:1.5rem;opacity:.35;color:#10b981;"></i>
+                Aucune action en attente
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/api.js"></script>
+    <script src="assets/js/app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,81 @@
+.ph-light {
+  display: inline-block;
+  width: 1em;
+  min-width: 1em;
+  line-height: 1;
+  font-family: Arial, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  text-align: center;
+  vertical-align: -0.08em;
+  color: currentColor;
+}
+
+.ph-light::before {
+  display: block;
+  font-size: 1.08em;
+}
+.ph-arrow-clockwise::before,
+.ph-arrow-repeat::before,
+.ph-arrows-clockwise::before { content: "↻"; }
+.ph-arrow-right::before,
+.ph-caret-right::before { content: "›"; }
+.ph-arrow-up::before { content: "↑"; }
+.ph-bell::before { content: "◦"; }
+.ph-book-open::before,
+.ph-notebook::before { content: "▤"; }
+.ph-calendar::before,
+.ph-calendar-blank::before { content: "▦"; }
+.ph-caret-down::before { content: "⌄"; }
+.ph-chart-bar::before,
+.ph-chart-line::before { content: "▥"; }
+.ph-check::before,
+.ph-check-bold::before { content: "✓"; }
+.ph-check-circle::before { content: "◎"; }
+.ph-circle::before,
+.ph-circle-notch::before,
+.ph-spinner::before { content: "○"; }
+.ph-clock-clockwise::before,
+.ph-hourglass-medium::before { content: "◷"; }
+.ph-coins::before,
+.ph-currency-dollar::before { content: "$"; }
+.ph-door::before { content: "▯"; }
+.ph-download-simple::before { content: "⇩"; }
+.ph-envelope::before { content: "✉"; }
+.ph-eraser::before { content: "⌫"; }
+.ph-exclamation-circle::before,
+.ph-warning::before,
+.ph-warning-circle::before { content: "!"; }
+.ph-eye::before { content: "◉"; }
+.ph-eye-slash::before { content: "◎"; }
+.ph-file-pdf::before { content: "PDF"; font-size: 0.68em; font-weight: 700; }
+.ph-file-text::before,
+.ph-note-pencil::before { content: "▣"; }
+.ph-floppy-disk::before { content: "▣"; }
+.ph-funnel::before { content: "▽"; }
+.ph-info::before { content: "i"; font-weight: 700; }
+.ph-list-checks::before,
+.ph-table::before { content: "☷"; }
+.ph-lock::before { content: "□"; }
+.ph-magnifying-glass::before { content: "⌕"; }
+.ph-pen::before,
+.ph-pen-nib::before,
+.ph-pencil::before,
+.ph-vector-pen::before { content: "✎"; }
+.ph-plus::before { content: "+"; }
+.ph-qr-code::before { content: "⌗"; }
+.ph-shield-check::before { content: "◇"; }
+.ph-sign-out::before { content: "⇥"; }
+.ph-sliders::before,
+.ph-sliders-horizontal::before { content: "≡"; }
+.ph-squares-four::before { content: "▦"; }
+.ph-trash::before { content: "⌧"; }
+.ph-upload-simple::before { content: "⇧"; }
+.ph-user-check::before,
+.ph-user-gear::before,
+.ph-user-minus::before,
+.ph-user-plus::before,
+.ph-users::before,
+.ph-users-three::before { content: "◌"; }
+.ph-video-camera::before { content: "▻"; }
+.ph-x::before { content: "×"; }

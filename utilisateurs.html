@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EduSchedule Pro | Utilisateurs</title>
+    <link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/vendor/bootstrap-icons/font/bootstrap-icons.min.css" />
+    <link rel="stylesheet" href="assets/css/style.css?v=4" />
+    <link rel="stylesheet" href="assets/css/theme.css" />
+  </head>
+  <body class="app-shell" data-page="utilisateurs">
+    <div data-app-shell></div>
+    <div data-page-content class="d-none">
+      <div class="surface-card">
+        <div class="section-header">
+          <div>
+            <h2>Comptes et accès</h2>
+            <p>Liste des comptes, rôles, accès accordés et état des connexions.</p>
+          </div>
+        </div>
+        <div class="page-toolbar">
+          <div class="toolbar-filters">
+            <input class="form-control" id="usersFilterInput" type="text" placeholder="Filtrer par nom, e-mail, rôle ou accès" />
+          </div>
+          <div class="toolbar-actions">
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#userModal" id="openUserModalBtn" type="button"><i class="bi bi-person-plus me-2"></i>Ajouter un utilisateur</button>
+          </div>
+        </div>
+        <div class="alert alert-warning d-none" id="usersRoleAlert"></div>
+        <div class="table-wrap">
+          <table class="table align-middle">
+            <thead>
+              <tr>
+                <th>Utilisateur</th>
+                <th>Rôle</th>
+                <th>Entité liée</th>
+                <th>Accès</th>
+                <th>Statut</th>
+                <th>Dernière connexion</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="utilisateursPageBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="modal fade" id="userModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Créer un utilisateur</h5>
+              <button class="btn-close" type="button" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+              <div class="row g-3">
+                <div class="col-md-3"><label class="form-label">Nom</label><input class="form-control" id="modalUserNom" type="text" /></div>
+                <div class="col-md-3"><label class="form-label">Prénom</label><input class="form-control" id="modalUserPrenom" type="text" /></div>
+                <div class="col-md-3"><label class="form-label">Adresse e-mail</label><input class="form-control" id="modalUserEmail" type="email" /></div>
+                <div class="col-md-3"><label class="form-label">Mot de passe</label><input class="form-control" id="modalUserPassword" type="text" value="Campus@2026" /></div>
+                <div class="col-md-4"><label class="form-label">Rôle</label><select class="form-select" id="modalUserRole"></select></div>
+                <div class="col-md-4"><label class="form-label">Type de lien</label><select class="form-select" id="modalUserTypeLien"><option value="aucun">Aucun</option><option value="enseignant">Enseignant</option><option value="classe">Classe</option><option value="surveillant">Surveillant</option><option value="comptable">Comptable</option></select></div>
+                <div class="col-md-4"><label class="form-label">Entité liée</label><select class="form-select" id="modalUserEntity"></select></div>
+                <div class="col-12">
+                  <label class="form-label">Accès hérités du rôle</label>
+                  <div class="form-panel text-muted-soft" id="modalRoleAccessPreview">Sélectionnez un rôle pour afficher ses accès.</div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-light" type="button" data-bs-dismiss="modal">Annuler</button>
+              <button class="btn btn-primary" id="saveUserFromPageBtn" type="button"><i class="bi bi-floppy me-1"></i>Créer le compte</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/api.js"></script>
+    <script src="assets/js/app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EduSchedule Pro | Rapports</title>
+    <link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/vendor/bootstrap-icons/font/bootstrap-icons.min.css" />
+    <link rel="stylesheet" href="assets/css/style.css?v=4" />
+    <link rel="stylesheet" href="assets/css/theme.css" />
+  </head>
+  <body class="app-shell" data-page="rapports">
+    <div data-app-shell></div>
+    <div data-page-content class="d-none">
+      <div id="reportsAlert" class="alert alert-info d-none mb-3">
+        <i class="bi bi-info-circle me-2"></i><span class="demo-alert-text">Téléchargement prêt.</span>
+      </div>
+
+      <!-- En-tête : titre + période + exports -->
+      <div class="rp-head mb-3">
+        <div>
+          <h1 class="rp-title">Rapports</h1>
+          <p class="rp-sub">Indicateurs et exports de la base active</p>
+        </div>
+        <div class="rp-head-right">
+          <input class="form-control form-control-sm" id="reportsPeriodInput" type="text" style="width:200px;" value="27 avr. 2026 → 02 mai 2026" />
+          <button class="btn btn-sm btn-outline-primary" id="reportsRefreshBtn" type="button">
+            <i class="bi bi-arrow-clockwise"></i>
+          </button>
+          <div class="rp-exports">
+            <button class="btn btn-sm btn-primary" id="reportsSessionsPdfBtn" type="button">
+              <i class="bi bi-file-pdf me-1"></i>Séances PDF
+            </button>
+            <button class="btn btn-sm btn-primary" id="reportsVacationsPdfBtn" type="button">
+              <i class="bi bi-file-pdf me-1"></i>Vacations PDF
+            </button>
+            <button class="btn btn-sm btn-outline-success" id="reportsExcelBtn" type="button">
+              <i class="bi bi-table me-1"></i>Excel
+            </button>
+            <button class="btn btn-sm btn-outline-secondary" id="reportsReferencesPdfBtn" type="button">
+              <i class="bi bi-file-text me-1"></i>Référentiels
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- KPIs -->
+      <div class="reports-kpis mb-3" id="reportsKpis"></div>
+
+      <!-- Graphiques -->
+      <div class="rp-charts-grid">
+        <div class="surface-card rp-chart-card">
+          <div class="rp-card-head">
+            <h2>Activités par jour</h2>
+            <select class="form-select form-select-sm" style="width:auto;">
+              <option>Période courante</option>
+            </select>
+          </div>
+          <div class="reports-line-chart" id="reportsLineChart"></div>
+        </div>
+
+        <div class="surface-card rp-chart-card">
+          <div class="rp-card-head">
+            <h2>Répartition des référentiels</h2>
+            <select class="form-select form-select-sm" style="width:auto;">
+              <option>Par catégorie</option>
+            </select>
+          </div>
+          <div class="rp-donut-wrap">
+            <div class="reports-donut" id="reportsDonutValue">0</div>
+            <div class="reports-donut-legend" id="reportsDonutLegend"></div>
+          </div>
+        </div>
+
+        <div class="surface-card rp-chart-card">
+          <div class="rp-card-head">
+            <h2>Volumes par classe</h2>
+            <select class="form-select form-select-sm" style="width:auto;">
+              <option>Vue globale</option>
+            </select>
+          </div>
+          <div class="reports-bars" id="reportsBars"></div>
+        </div>
+      </div>
+    </div>
+
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/api.js"></script>
+    <script src="assets/js/app.js"></script>
+  </body>
+</html>

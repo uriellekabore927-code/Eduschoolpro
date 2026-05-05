@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EduSchedule Pro | Pointage QR</title>
+    <link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/vendor/bootstrap-icons/font/bootstrap-icons.min.css" />
+    <link rel="stylesheet" href="assets/css/style.css?v=4" />
+    <link rel="stylesheet" href="assets/css/theme.css?v=4" />
+    <style>
+      .qr-stage { height: 60vh !important; min-height: 450px !important; }
+      .qr-stage-overlay { position: absolute !important; inset: 0 !important; height: auto !important; }
+    </style>
+  </head>
+  <body class="app-shell" data-page="pointage">
+    <div data-app-shell></div>
+    <div data-page-content class="d-none">
+      <div id="pointageAlert" class="alert alert-success d-none mb-4">
+        <i class="bi bi-check-circle me-2"></i><span class="demo-alert-text">Présence enregistrée.</span>
+      </div>
+
+      <div class="page-heading mb-4">
+        <h1>Pointage QR</h1>
+        <p>Scannez le QR code de la séance pour enregistrer la présence de l'enseignant.</p>
+      </div>
+
+      <div class="row g-4" id="pointageRow">
+        <div class="col-12" id="scanCol">
+          <div class="surface-card qr-scan-card" id="scan-qr">
+            <div class="qr-card-title">
+              <i class="bi bi-qr-code-scan"></i>
+              <span>Scanner le QR code</span>
+            </div>
+
+            <div class="qr-stage">
+              <div class="qr-stage-overlay">
+                <video id="pointageCameraVideo" class="qr-camera-video" autoplay playsinline muted></video>
+                <div class="qr-camera-empty" id="pointageCameraEmpty">
+                  <i class="bi bi-camera-video" style="font-size:2rem"></i>
+                  <span>Activation de la caméra en cours...</span>
+                </div>
+                <span class="qr-corner top-left"></span>
+                <span class="qr-corner top-right"></span>
+                <span class="qr-corner bottom-left"></span>
+                <span class="qr-corner bottom-right"></span>
+                <span class="qr-scan-line"></span>
+              </div>
+            </div>
+
+            <div class="qr-stage-actions">
+              <button class="btn btn-primary qr-camera-btn" id="pointageStartCameraBtn" type="button">
+                <i class="bi bi-camera-video me-2"></i><span id="pointageStartCameraLabel">Activer la caméra</span>
+              </button>
+              <a class="btn btn-outline-primary qr-open-local-btn d-none" id="pointageOpenLocalBtn" href="#">Ouvrir en localhost</a>
+              <span id="pointageCameraStatus">Caméra active</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-6 d-none" id="resultCol">
+          <div class="surface-card qr-result-card" id="result-validation">
+            <div class="qr-result-head">
+              <h2>Résultat du pointage</h2>
+            </div>
+
+            <div class="qr-success-box" id="pointageSuccessBox">
+              <div class="qr-success-icon"><i class="bi bi-check2-circle"></i></div>
+              <div>
+                <strong id="pointageResultTitle">En attente de scan</strong>
+                <span id="pointageResultText">Scannez un QR code pour afficher les détails de la présence.</span>
+              </div>
+            </div>
+
+            <div class="qr-details-card">
+              <h3>Détails</h3>
+              <div class="qr-detail-list">
+                <div class="qr-detail-row"><span>Enseignant</span><strong id="pointageEnseignant">-</strong></div>
+                <div class="qr-detail-row"><span>Classe</span><strong id="pointageClasse">-</strong></div>
+                <div class="qr-detail-row"><span>Matière</span><strong id="pointageMatiere">-</strong></div>
+                <div class="qr-detail-row"><span>Salle</span><strong id="pointageSalle">-</strong></div>
+                <div class="qr-detail-row"><span>Date</span><strong id="pointageDate">-</strong></div>
+                <div class="qr-detail-row"><span>Heure</span><strong id="pointageHoraire">-</strong></div>
+                <div class="qr-detail-row"><span>Statut</span><strong><span class="status-badge neutral" id="pointageStatusBadge">En attente</span></strong></div>
+              </div>
+            </div>
+
+            <div class="qr-result-time" id="pointageInfoBox">
+              <i class="bi bi-clock-history"></i>
+              <span>Aucun pointage enregistré pour le moment.</span>
+            </div>
+
+            <div class="qr-result-actions">
+              <button class="btn btn-outline-primary" id="pointageResetBtn" type="button">
+                <i class="bi bi-arrow-clockwise me-2"></i>Scanner un autre QR
+              </button>
+              <button class="btn btn-primary" id="pointageValidateBtn" type="button">
+                <i class="bi bi-list-check me-2"></i>Voir la liste des présences
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="pointageHistoryModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Liste des présences</h5>
+              <button class="btn-close" type="button" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+              <div class="table-wrap">
+                <table class="table align-middle">
+                  <thead>
+                    <tr>
+                      <th>Heure</th>
+                      <th>Enseignant</th>
+                      <th>Séance</th>
+                      <th>Statut</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody id="pointageRecentBody"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/jsqr.min.js"></script>
+    <script src="assets/js/api.js"></script>
+    <script src="assets/js/app.js"></script>
+  </body>
+</html>

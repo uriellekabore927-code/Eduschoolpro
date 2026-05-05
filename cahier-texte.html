@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EduSchedule Pro | Cahier de texte</title>
+    <link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/vendor/bootstrap-icons/font/bootstrap-icons.min.css" />
+    <link rel="stylesheet" href="assets/css/style.css?v=4" />
+    <link rel="stylesheet" href="assets/css/theme.css" />
+  </head>
+  <body class="app-shell" data-page="cahier">
+    <div data-app-shell></div>
+    <div data-page-content class="d-none">
+      <div id="cahierAlert" class="alert alert-info d-none mb-4">
+        <i class="bi bi-info-circle me-2"></i><span class="demo-alert-text">Brouillon enregistré.</span>
+      </div>
+
+      <div class="page-heading mb-4">
+        <h1>Cahier de texte</h1>
+        <p>Consultez, rédigez et validez le cahier de texte des séances.</p>
+      </div>
+
+      <div class="cahier-toolbar mb-4">
+        <select class="form-select" id="cahierClasseFilter"></select>
+        <select class="form-select" id="cahierMatiereFilter"></select>
+        <select class="form-select" id="cahierEnseignantFilter"></select>
+        <input class="form-control" id="cahierWeekFilter" type="date" value="2026-04-27" />
+        <button class="btn btn-primary" id="cahierApplyFiltersBtn" type="button">
+          <i class="bi bi-funnel me-2"></i>Filtrer
+        </button>
+      </div>
+
+      <div class="cahier-pro-layout">
+        <aside class="surface-card cahier-side-card" id="list-seances">
+          <div class="cahier-side-head">
+            <div>
+              <h2>Séances</h2>
+              <p id="cahierSessionCount">0 séance</p>
+            </div>
+            <button class="btn btn-outline-primary btn-sm" type="button" id="newCahierSessionBtn">
+              <i class="bi bi-plus me-1"></i>Nouvelle
+            </button>
+          </div>
+          <div class="cahier-session-list" id="cahierSessionList"></div>
+        </aside>
+
+        <section class="surface-card cahier-workspace-card" id="formulaire-cahier">
+          <div class="cahier-workspace-head">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <button class="btn btn-sm btn-outline-secondary cahier-back-btn" id="cahierBackBtn" type="button">
+                <i class="bi bi-chevron-right" style="transform:rotate(180deg);display:inline-block;"></i>Séances
+              </button>
+              <div>
+                <h2 id="cahierWorkspaceTitle">Saisie du cahier</h2>
+                <p id="cahierWorkspaceSubtitle">Renseignez les informations pédagogiques et sauvegardez la séance.</p>
+              </div>
+            </div>
+            <div class="cahier-head-actions">
+              <button class="btn btn-outline-primary" id="saveCahierBtn" type="button">
+                <i class="bi bi-floppy me-2"></i>Enregistrer
+              </button>
+              <button class="btn btn-primary" id="signCahierBtn" type="button">
+                <i class="bi bi-pen me-2"></i>Signer
+              </button>
+              <button class="btn btn-success" id="closeCahierBtn" type="button">
+                <i class="bi bi-check-circle me-2"></i>Clôturer
+              </button>
+            </div>
+          </div>
+
+          <div class="cahier-mode-switch" role="tablist" aria-label="Fonctions du cahier">
+            <button class="cahier-mode-btn active" type="button" data-cahier-view-btn="form">
+              <i class="bi bi-pencil-square"></i><span>Saisie</span>
+            </button>
+            <button class="cahier-mode-btn" type="button" data-cahier-view-btn="resume">
+              <i class="bi bi-file-text"></i><span>Résumé</span>
+            </button>
+            <button class="cahier-mode-btn" type="button" data-cahier-view-btn="signatures">
+              <i class="bi bi-vector-pen"></i><span>Signatures</span>
+            </button>
+            <button class="cahier-mode-btn" type="button" data-cahier-view-btn="history">
+              <i class="bi bi-arrow-clockwise"></i><span>Historique</span>
+            </button>
+          </div>
+
+          <div class="cahier-session-banner">
+            <div class="cahier-session-banner-main">
+              <strong id="cahierSummaryMatiere">-</strong>
+              <span id="cahierSummaryClasse">-</span>
+            </div>
+            <div class="cahier-session-banner-meta">
+              <span id="cahierSummaryHoraire">-</span>
+              <span id="cahierSummarySalle">-</span>
+              <span class="status-badge neutral" id="cahierSummaryStatus">Brouillon</span>
+            </div>
+          </div>
+
+          <div class="cahier-view-stack">
+            <div class="cahier-view-panel active" data-cahier-view="form">
+              <div class="cahier-form-grid">
+                <div class="cahier-field-block">
+                  <label class="form-label">Date de la séance</label>
+                  <input class="form-control" id="cahierDateInfo" readonly />
+                </div>
+                <div class="cahier-field-block">
+                  <label class="form-label">Heure début</label>
+                  <input class="form-control" id="cahierHeureDebutInfo" readonly />
+                </div>
+                <div class="cahier-field-block">
+                  <label class="form-label">Heure fin</label>
+                  <input class="form-control" id="cahierHeureFinInfo" readonly />
+                </div>
+                <div class="cahier-field-block">
+                  <label class="form-label">Salle</label>
+                  <input class="form-control" id="cahierSalleInfo" readonly />
+                </div>
+                <div class="cahier-field-block cahier-field-block-wide">
+                  <label class="form-label">Niveau d’avancement</label>
+                  <div class="cahier-range-box">
+                    <input class="form-range" id="cahierProgressInput" type="range" min="0" max="100" step="5" value="20" />
+                    <span id="cahierProgressValue">20%</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label">Titre du cours</label>
+                <input class="form-control" id="cahierTitreInput" type="text" />
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label">Contenu / notions abordées</label>
+                <textarea class="form-control" id="cahierPointsInput" rows="8"></textarea>
+              </div>
+
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label class="form-label">Travaux demandés</label>
+                  <textarea class="form-control" id="cahierTravauxInput" rows="5"></textarea>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Observations</label>
+                  <textarea class="form-control" id="cahierObservationsInput" rows="5"></textarea>
+                </div>
+              </div>
+            </div>
+
+            <div class="cahier-view-panel" data-cahier-view="resume" id="detail-cahier">
+              <div class="cahier-resume-grid">
+                <div class="cahier-summary-card">
+                  <div class="cahier-summary-title">Fiche de séance</div>
+                  <div class="cahier-summary-grid">
+                    <span>Matière</span><strong id="cahierResumeMatiere">-</strong>
+                    <span>Classe</span><strong id="cahierResumeClasse">-</strong>
+                    <span>Enseignant</span><strong id="cahierSummaryEnseignant">-</strong>
+                    <span>Salle</span><strong id="cahierResumeSalle">-</strong>
+                    <span>Date</span><strong id="cahierSummaryDate">-</strong>
+                    <span>Avancement</span><strong id="cahierSummaryProgress">20%</strong>
+                  </div>
+                </div>
+
+                <div class="cahier-detail-block">
+                  <h3>Titre du cours</h3>
+                  <p id="cahierPreviewTitre">-</p>
+                </div>
+                <div class="cahier-detail-block">
+                  <h3>Notions abordées</h3>
+                  <div id="cahierPreviewPoints" class="cahier-preview-text">-</div>
+                </div>
+                <div class="cahier-detail-block">
+                  <h3>Travaux demandés</h3>
+                  <div id="cahierPreviewTravaux" class="cahier-preview-text">-</div>
+                </div>
+                <div class="cahier-detail-block">
+                  <h3>Observations</h3>
+                  <p id="cahierPreviewObservations">-</p>
+                </div>
+                <div class="cahier-detail-block">
+                  <h3>Signatures enregistrées</h3>
+                  <div id="cahierResumeSignatures" class="cahier-preview-text">Aucune signature enregistrée.</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="cahier-view-panel" data-cahier-view="signatures">
+              <div class="cahier-signatures-grid">
+                <div class="signature-panel">
+                  <div class="cahier-signature-card-head">
+                    <div>
+                      <div class="small text-muted-soft mb-2">Signature du délégué</div>
+                      <div class="fw-semibold">Délégué de classe</div>
+                    </div>
+                    <span class="status-badge neutral" id="cahierDelegueStatusBadge">En attente</span>
+                  </div>
+                  <div id="cahierDelegueSignatureArea"></div>
+                </div>
+                <div class="signature-panel">
+                  <div class="cahier-signature-card-head">
+                    <div>
+                      <div class="small text-muted-soft mb-2">Signature de l’enseignant</div>
+                      <div class="fw-semibold">Enseignant</div>
+                    </div>
+                    <span class="status-badge neutral" id="cahierEnseignantStatusBadge">En attente</span>
+                  </div>
+                  <div id="cahierEnseignantSignatureArea"></div>
+                </div>
+              </div>
+
+              <div class="signature-panel mt-3">
+                <div class="small text-muted-soft mb-2">Suivi des signatures</div>
+                <div class="table-wrap">
+                  <table class="table align-middle mb-0">
+                    <thead>
+                      <tr><th>Rôle</th><th>État</th><th>Signataire</th><th>Horodatage</th></tr>
+                    </thead>
+                    <tbody id="cahierSignatureStatusBody"></tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <div class="cahier-view-panel" data-cahier-view="history">
+              <div class="timeline-item">
+                <span class="timeline-dot"></span>
+                <div>
+                  <strong>Brouillon initial</strong>
+                  <div class="text-muted-soft">Créé depuis le formulaire de séance.</div>
+                </div>
+              </div>
+              <div class="timeline-item">
+                <span class="timeline-dot"></span>
+                <div>
+                  <strong>Validation progressive</strong>
+                  <div class="text-muted-soft">Les signatures et la clôture sont journalisées ici.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <select class="d-none" id="cahierCreneauSelect"></select>
+    </div>
+
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/api.js"></script>
+    <script src="assets/js/app.js"></script>
+  </body>
+</html>

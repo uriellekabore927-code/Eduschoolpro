@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EduSchedule Pro | Vacations</title>
+    <link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/vendor/bootstrap-icons/font/bootstrap-icons.min.css" />
+    <link rel="stylesheet" href="assets/css/style.css?v=4" />
+    <link rel="stylesheet" href="assets/css/theme.css" />
+  </head>
+  <body class="app-shell" data-page="vacations">
+    <div data-app-shell></div>
+    <div data-page-content class="d-none">
+      <div id="vacationsAlert" class="alert d-none mb-3"><i class="bi bi-exclamation-triangle me-2"></i><span class="demo-alert-text"></span></div>
+      <div class="page-heading mb-4">
+        <h1>Module Vacation</h1>
+        <p>Consultez, contrôlez et validez les fiches de vacation des enseignants.</p>
+      </div>
+
+      <div class="vacation-filters surface-card mb-4">
+        <div class="vacation-filter-row">
+          <input class="form-control" id="vacationsPeriodInput" type="text" value="27 avr. – 02 mai 2026" />
+          <select class="form-select" id="vacationsClassFilter">
+            <option value="">Toutes les classes</option>
+          </select>
+          <select class="form-select" id="vacationTeacherSelect"></select>
+          <select class="form-select" id="vacationsStatusFilter">
+            <option value="">Tous les statuts</option>
+            <option value="generee">En attente contrôle</option>
+            <option value="controlee">Contrôlée</option>
+            <option value="validee">Validée comptable</option>
+            <option value="payee">Payée</option>
+          </select>
+          <button class="btn btn-primary" id="vacationsApplyFiltersBtn" type="button">
+            <i class="bi bi-funnel me-2"></i>Filtrer
+          </button>
+          <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#ficheModal" type="button">
+            <i class="bi bi-plus me-2"></i>Générer une fiche
+          </button>
+          <button class="btn btn-outline-primary ms-auto" id="vacationsExportBtn" type="button">
+            <i class="bi bi-file-pdf me-2"></i>Exporter PDF
+          </button>
+        </div>
+      </div>
+
+      <div class="summary-strip mb-4">
+        <div class="mini-metric"><strong id="vacSummaryHours">0 h</strong><span class="text-muted-soft">Total heures validées</span></div>
+        <div class="mini-metric"><strong id="vacSummaryBrut">0 FCFA</strong><span class="text-muted-soft">Montant brut</span></div>
+        <div class="mini-metric"><strong id="vacSummaryRetenues">0 FCFA</strong><span class="text-muted-soft">Retenues diverses</span></div>
+        <div class="mini-metric"><strong id="vacSummaryNet">0 FCFA</strong><span class="text-muted-soft">Net à payer</span></div>
+      </div>
+
+      <div class="vacation-layout">
+        <div class="surface-card vacation-list-card" id="list-fiches">
+          <div class="vacation-list-head">
+            <h2>Liste des fiches de vacation</h2>
+          </div>
+          <div class="table-wrap">
+            <table class="table align-middle vacation-table">
+              <thead>
+                <tr>
+                  <th>N° Fiche</th>
+                  <th>Enseignant</th>
+                  <th>Classe(s)</th>
+                  <th>Période</th>
+                  <th>Heures</th>
+                  <th>Montant (FCFA)</th>
+                  <th>Statut</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="vacationsBody"></tbody>
+            </table>
+          </div>
+          <div class="vacation-list-footer" id="vacationsListCount">0 fiche</div>
+        </div>
+
+        <div class="surface-card vacation-detail-card" id="detail-fiche">
+          <div class="vacation-detail-head">
+            <div class="vacation-detail-icon"><i class="bi bi-file-text"></i></div>
+            <div class="vacation-detail-header-text">
+              <h2>Aperçu de la fiche sélectionnée</h2>
+              <strong id="vacDetailNumber">-</strong>
+              <span id="vacDetailPeriod">Période : -</span>
+            </div>
+            <span class="status-badge neutral" id="vacDetailStatus">-</span>
+          </div>
+
+          <div class="vacation-detail-section">
+            <div class="vacation-detail-title">Informations générales</div>
+            <div class="vacation-detail-grid">
+              <span>Enseignant</span><strong id="vacDetailTeacher">-</strong>
+              <span>Classe(s)</span><strong id="vacDetailClasses">-</strong>
+              <span>Matière(s)</span><strong id="vacDetailSubjects">-</strong>
+              <span>Nombre d’heures</span><strong id="vacDetailHours">-</strong>
+              <span>Taux horaire</span><strong id="vacDetailRate">-</strong>
+              <span>Montant total</span><strong id="vacDetailAmount">-</strong>
+            </div>
+          </div>
+
+          <div class="vacation-detail-section">
+            <div class="vacation-detail-title">Récapitulatif des séances</div>
+            <div class="table-wrap">
+              <table class="table align-middle vacation-detail-table mb-0">
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Heure</th>
+                    <th>Classe</th>
+                    <th>Matière</th>
+                    <th>Heures</th>
+                  </tr>
+                </thead>
+                <tbody id="vacDetailLinesBody"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <button class="btn btn-outline-primary w-100 mt-3" id="vacDetailMoreBtn" type="button">
+            <i class="bi bi-file-earmark-pdf me-2"></i>Voir le détail complet (PDF)
+          </button>
+          <div id="validation-fiche"></div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="ficheModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Générer une fiche de vacation</h5>
+              <button class="btn-close" type="button" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+              <div class="mb-3" id="vacationTeacherSelectModalRow"><label class="form-label">Enseignant</label><select class="form-select" id="vacationTeacherSelectModal"></select></div>
+              <div class="mb-3" id="vacationTeacherSelfRow" style="display:none"><label class="form-label">Enseignant</label><p class="form-control-plaintext fw-semibold" id="vacationTeacherSelfName"></p></div>
+              <div class="mb-3"><label class="form-label">Mois</label><select class="form-select" id="vacationMonthSelect"><option value="4">Avril</option><option value="5">Mai</option><option value="6">Juin</option></select></div>
+              <div class="mb-3"><label class="form-label">Année</label><select class="form-select" id="vacationYearSelect"><option value="2026">2026</option></select></div>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-light" type="button" data-bs-dismiss="modal">Fermer</button>
+              <button class="btn btn-primary" id="generateVacationBtn" type="button">Générer</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/api.js"></script>
+    <script src="assets/js/app.js"></script>
+  </body>
+</html>

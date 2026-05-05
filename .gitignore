@@ -1,0 +1,25 @@
+# Uploads générés
+uploads/pdf/
+uploads/
+
+# Fichiers d'environnement
+.env
+*.env
+
+# Certificats
+certs/
+
+# OS / éditeurs
+.DS_Store
+Thumbs.db
+*.Zone.Identifier
+.vscode/
+.idea/
+
+# Scripts de génération
+generate_*.py
+*.pyc
+
+# PHP cache
+backend/cache/
+.claude/

@@ -1,0 +1,109 @@
+.bi {
+  display: inline-block;
+  line-height: 1;
+  font-style: normal;
+  font-weight: 400;
+  vertical-align: -.125em;
+}
+
+.bi::before {
+  display: inline-block;
+}
+
+/* Navigation & layout */
+.bi-grid::before { content: "▦"; }
+.bi-list::before { content: "☰"; }
+.bi-x::before { content: "✕"; }
+.bi-x-lg::before { content: "✕"; }
+.bi-plus::before,
+.bi-plus-lg::before { content: "+"; }
+.bi-chevron-right::before { content: "›"; }
+.bi-chevron-down::before { content: "⌄"; }
+.bi-arrow-right::before { content: "→"; }
+.bi-arrow-up::before { content: "↑"; }
+.bi-arrow-clockwise::before,
+.bi-arrow-repeat::before { content: "↻"; }
+.bi-sliders2::before,
+.bi-sliders::before { content: "⚙"; }
+.bi-funnel::before { content: "⏷"; }
+.bi-search::before { content: "⌕"; }
+
+/* Communication */
+.bi-bell::before { content: "🔔"; }
+.bi-envelope::before { content: "✉"; }
+.bi-info-circle::before { content: "ⓘ"; }
+.bi-exclamation-circle::before { content: "⚠"; }
+.bi-exclamation-triangle::before { content: "⚠"; }
+
+/* Auth */
+.bi-lock::before { content: "🔒"; }
+.bi-eye::before { content: "👁"; }
+.bi-eye-slash::before { content: "🙈"; }
+.bi-box-arrow-right::before { content: "⇥"; }
+.bi-shield-check::before { content: "🛡"; }
+
+/* Calendar & time */
+.bi-calendar::before,
+.bi-calendar3::before { content: "🗓"; }
+.bi-clock-history::before { content: "🕘"; }
+.bi-hourglass-split::before { content: "⏳"; }
+
+/* QR & scan */
+.bi-qr-code-scan::before { content: "⌗"; }
+.bi-qr-code::before { content: "⊞"; }
+.bi-camera-video::before { content: "📷"; }
+
+/* Files & docs */
+.bi-file-earmark-text::before { content: "📄"; }
+.bi-file-earmark-arrow-down::before { content: "⇩"; }
+.bi-file-earmark-pdf::before { content: "PDF"; font-size: .75em; font-weight: 700; vertical-align: .1em; }
+.bi-file-text::before { content: "📝"; }
+.bi-file-pdf::before { content: "PDF"; font-size: .75em; font-weight: 700; vertical-align: .1em; }
+.bi-journal-check::before { content: "☑"; }
+.bi-journal-text::before { content: "📓"; }
+.bi-card-checklist::before { content: "☑"; }
+.bi-book::before { content: "📖"; }
+
+/* Data & charts */
+.bi-table::before { content: "▤"; }
+.bi-bar-chart::before { content: "▥"; }
+.bi-bar-chart-line::before { content: "📊"; }
+.bi-graph-up::before { content: "↗"; }
+.bi-diagram-3::before { content: "⬡"; }
+
+/* Finance */
+.bi-cash-coin::before { content: "💰"; }
+.bi-cash-stack::before { content: "💰"; }
+.bi-coin::before { content: "🪙"; }
+.bi-currency-dollar::before { content: "$"; }
+
+/* People */
+.bi-people::before { content: "👥"; }
+.bi-person-check::before { content: "👤"; }
+.bi-person-plus::before { content: "👤"; }
+.bi-person-dash::before { content: "👤"; }
+.bi-person-gear::before { content: "⚙"; }
+
+/* Actions */
+.bi-pencil-square::before,
+.bi-pencil::before,
+.bi-pen::before,
+.bi-vector-pen::before { content: "✎"; }
+.bi-eraser::before { content: "✏"; }
+.bi-floppy::before,
+.bi-save::before { content: "💾"; }
+.bi-upload::before { content: "⇪"; }
+.bi-download::before { content: "⇩"; }
+.bi-trash::before { content: "🗑"; }
+.bi-patch-check::before { content: "✓"; }
+.bi-check2-circle::before,
+.bi-check-circle::before { content: "✓"; }
+.bi-check-lg::before { content: "✓"; }
+.bi-list-check::before { content: "☑"; }
+
+/* Misc */
+.bi-circle::before { content: "•"; }
+.bi-door-open::before { content: "🚪"; }
+
+/* Password eye — larger for visibility */
+.password-toggle-btn i.bi { font-size: 1.1rem; }

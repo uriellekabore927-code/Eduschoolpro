@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EduSchedule Pro | Connexion</title>
+    <link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/vendor/bootstrap-icons/font/bootstrap-icons.min.css" />
+    <link rel="stylesheet" href="assets/css/style.css?v=4" />
+    <link rel="stylesheet" href="assets/css/theme.css" />
+  </head>
+  <body class="page-auth">
+    <div class="auth-root">
+
+      <!-- ── Panneau gauche – branding ── -->
+      <div class="auth-left d-none d-lg-flex">
+        <div class="auth-left-inner">
+
+          <div class="auth-brand">
+            <div class="auth-brand-icon">
+              <img src="assets/img/logo.png" alt="EduSchedule Pro" style="width:36px;height:36px;object-fit:contain;filter:brightness(0) invert(1);">
+            </div>
+            <div>
+              <div class="auth-brand-name">EduSchedule Pro</div>
+              <div class="auth-brand-tagline">Système intégré de gestion académique</div>
+            </div>
+          </div>
+
+          <div class="auth-headline">
+            <h1>Gérez l'intégralité du cycle pédagogique</h1>
+            <p>De la planification des cours jusqu'au paiement des vacations, tout en une seule plateforme.</p>
+          </div>
+
+          <div class="auth-modules">
+            <div class="auth-module-item">
+              <div class="auth-module-icon" style="background:rgba(96,165,250,.15)">
+                <i class="bi bi-calendar3" style="color:#60a5fa"></i>
+              </div>
+              <div>
+                <strong>Emploi du temps</strong>
+                <span>Planification hebdomadaire avec détection des conflits</span>
+              </div>
+            </div>
+            <div class="auth-module-item">
+              <div class="auth-module-icon" style="background:rgba(52,211,153,.15)">
+                <i class="bi bi-qr-code-scan" style="color:#34d399"></i>
+              </div>
+              <div>
+                <strong>Pointage QR-Code</strong>
+                <span>Validation numérique sécurisée de la présence</span>
+              </div>
+            </div>
+            <div class="auth-module-item">
+              <div class="auth-module-icon" style="background:rgba(251,191,36,.15)">
+                <i class="bi bi-journal-text" style="color:#fbbf24"></i>
+              </div>
+              <div>
+                <strong>Cahier de texte</strong>
+                <span>Suivi pédagogique et signatures numériques</span>
+              </div>
+            </div>
+            <div class="auth-module-item">
+              <div class="auth-module-icon" style="background:rgba(248,113,113,.15)">
+                <i class="bi bi-coin" style="color:#f87171"></i>
+              </div>
+              <div>
+                <strong>Fiches de vacation</strong>
+                <span>Calcul automatique et validation comptable</span>
+              </div>
+            </div>
+            <div class="auth-module-item">
+              <div class="auth-module-icon" style="background:rgba(167,139,250,.15)">
+                <i class="bi bi-graph-up" style="color:#a78bfa"></i>
+              </div>
+              <div>
+                <strong>Tableau de bord</strong>
+                <span>Statistiques et alertes en temps réel</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="auth-footer-note">
+            <img src="assets/img/logo.png" alt="Eduschoolpro" class="auth-school-logo" />
+            <span>Eduschoolpro · 2025–2026</span>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ── Panneau droit – formulaire ── -->
+      <div class="auth-right">
+        <div class="auth-form-wrap">
+
+          <!-- Logo mobile uniquement -->
+          <div class="auth-mobile-brand d-flex d-lg-none">
+            <div class="auth-brand-icon auth-brand-icon-sm">
+              <img src="assets/img/logo.png" alt="EduSchedule Pro" style="width:26px;height:26px;object-fit:contain;">
+            </div>
+            <div>
+              <div class="auth-brand-name" style="font-size:1.05rem;">EduSchedule Pro</div>
+              <div class="auth-brand-tagline" style="font-size:.78rem;">Gestion académique</div>
+            </div>
+          </div>
+
+          <div class="auth-form-header">
+            <h2>Connexion</h2>
+            <p>Accédez à votre espace de travail</p>
+          </div>
+
+          <div id="loginFeedback" class="alert alert-danger d-none" role="alert"></div>
+
+          <form data-login-form class="auth-form-body" novalidate>
+            <div class="auth-field">
+              <label class="form-label" for="email">Adresse e-mail</label>
+              <div class="position-relative">
+                <i class="bi bi-envelope field-icon"></i>
+                <input
+                  class="form-control has-left-icon"
+                  id="email"
+                  name="email"
+                  type="email"
+                  placeholder="votre@email.com"
+                  autocomplete="email"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="auth-field">
+              <label class="form-label" for="password">Mot de passe</label>
+              <div class="position-relative">
+                <i class="bi bi-lock field-icon"></i>
+                <input
+                  class="form-control has-left-icon pe-5"
+                  id="password"
+                  name="password"
+                  type="password"
+                  placeholder="Votre mot de passe"
+                  autocomplete="current-password"
+                  required
+                />
+                <button class="password-toggle-btn" id="togglePasswordBtn" type="button" aria-label="Afficher le mot de passe" aria-pressed="false">
+                  <i class="bi bi-eye" id="togglePasswordIcon"></i>
+                </button>
+              </div>
+            </div>
+
+            <button class="btn btn-primary btn-lg auth-submit-btn" type="submit">
+              Se connecter
+              <i class="bi bi-arrow-right ms-2"></i>
+            </button>
+          </form>
+
+        </div>
+      </div>
+
+    </div>
+
+    <script src="assets/js/api.js"></script>
+    <script src="assets/js/app.js"></script>
+    <script src="assets/js/auth.js"></script>
+  </body>
+</html>

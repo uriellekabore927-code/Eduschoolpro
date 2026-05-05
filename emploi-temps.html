@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EduSchedule Pro | Emploi du temps</title>
+    <link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/vendor/bootstrap-icons/font/bootstrap-icons.min.css" />
+    <link rel="stylesheet" href="assets/css/style.css?v=4" />
+    <link rel="stylesheet" href="assets/css/theme.css" />
+  </head>
+  <body class="app-shell" data-page="emploi">
+    <div data-app-shell></div>
+    <div data-page-content class="d-none">
+      <div id="emploiAlert" class="alert alert-success d-none mb-3">
+        <i class="bi bi-check-circle me-2"></i><span class="demo-alert-text">Créneau enregistré.</span>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-xl-9">
+          <div class="surface-card emploi-board-card">
+            <div class="et-toolbar">
+              <select class="form-select form-select-sm et-select" id="emploiClasseSelect"></select>
+              <select class="form-select form-select-sm et-select-sm" id="emploiVueSelect">
+                <option value="semaine">Semaine</option>
+              </select>
+              <input class="form-control form-control-sm et-date" id="emploiSemaineInput" type="date" value="2026-04-27" />
+              <div class="et-sep"></div>
+              <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#coursModal" type="button">
+                <i class="bi bi-plus"></i> Ajouter
+              </button>
+              <button class="btn btn-sm et-icon-btn" id="emploiImportBtn" title="Importer" type="button">
+                <i class="bi bi-upload"></i>
+              </button>
+              <button class="btn btn-sm et-icon-btn" id="emploiExportBtn" data-bs-toggle="modal" data-bs-target="#exportEmploiModal" title="Exporter PDF" type="button">
+                <i class="bi bi-download"></i>
+              </button>
+              <button class="btn btn-sm et-icon-btn" id="emploiFilterBtn" title="Filtrer" type="button">
+                <i class="bi bi-sliders"></i>
+              </button>
+            </div>
+
+            <div class="emploi-meta-row">
+              <span class="status-badge neutral" id="emploiMetaBadge">Grille chargée</span>
+              <select class="form-select emploi-inline-select" id="emploiTeacherSelect"></select>
+              <select class="form-select emploi-inline-select" id="emploiRoomSelect"></select>
+            </div>
+
+            <div class="emploi-table-wrap" id="emploiTimetableGrid"></div>
+            <div class="emploi-footers" id="emploiFooterTables"></div>
+          </div>
+        </div>
+
+        <div class="col-xl-3">
+          <div class="surface-card emploi-references-card" id="emploiReferencesPanel">
+            <div class="emploi-ref-head">
+              <div>
+                <h3>Données liées</h3>
+              </div>
+              <button class="btn btn-sm btn-light" id="emploiReferencesCloseBtn" type="button" aria-label="Fermer">
+                <i class="bi bi-x"></i>
+              </button>
+            </div>
+
+            <div class="nav nav-tabs emploi-ref-tabs mb-3" role="tablist">
+              <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#refClasses" type="button">Classes</button>
+              <button class="nav-link" data-bs-toggle="tab" data-bs-target="#refMatieres" type="button">Matières</button>
+              <button class="nav-link" data-bs-toggle="tab" data-bs-target="#refEnseignants" type="button">Enseignants</button>
+              <button class="nav-link" data-bs-toggle="tab" data-bs-target="#refSalles" type="button">Salles</button>
+            </div>
+
+            <div class="tab-content">
+              <div class="tab-pane fade show active" id="refClasses">
+                <a class="btn btn-outline-primary w-100 mb-3 emploi-ref-manage-btn" href="parametres.html">
+                  <i class="bi bi-sliders me-2"></i>Gérer dans paramètres
+                </a>
+                <div class="emploi-ref-search mb-3">
+                  <i class="bi bi-search"></i>
+                  <input type="search" class="form-control" id="emploiClassSearchInput" placeholder="Rechercher une classe..." />
+                </div>
+                <div class="emploi-ref-list" id="emploiClassesRefList"></div>
+              </div>
+
+              <div class="tab-pane fade" id="refMatieres">
+                <div class="emploi-ref-list" id="emploiMatieresRefList"></div>
+              </div>
+
+              <div class="tab-pane fade" id="refEnseignants">
+                <div class="emploi-ref-list" id="emploiEnseignantsRefList"></div>
+              </div>
+
+              <div class="tab-pane fade" id="refSalles">
+                <div class="emploi-ref-list" id="emploiSallesRefList"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="coursModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Ajouter une séance</h5>
+              <button class="btn-close" type="button" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+              <div class="row g-3">
+                <div class="col-md-6"><label class="form-label">Classe</label><select class="form-select" id="creneauClasseSelect"></select></div>
+                <div class="col-md-6"><label class="form-label">Matière</label><select class="form-select" id="creneauMatiereSelect"></select></div>
+                <div class="col-md-6"><label class="form-label">Enseignant</label><select class="form-select" id="creneauEnseignantSelect"></select></div>
+                <div class="col-md-4"><label class="form-label">Jour</label><select class="form-select" id="creneauJourSelect"><option value="lundi">Lundi</option><option value="mardi">Mardi</option><option value="mercredi">Mercredi</option><option value="jeudi">Jeudi</option><option value="vendredi">Vendredi</option><option value="samedi">Samedi</option></select></div>
+                <div class="col-md-4"><label class="form-label">Début</label><input class="form-control" id="creneauDebutInput" type="time" /></div>
+                <div class="col-md-4"><label class="form-label">Fin</label><input class="form-control" id="creneauFinInput" type="time" /></div>
+                <div class="col-md-6"><label class="form-label">Salle</label><select class="form-select" id="creneauSalleSelect"></select></div>
+                <div class="col-md-6"><label class="form-label">Type</label><select class="form-select" id="creneauTypeSelect"><option value="cours_magistral">Cours magistral</option><option value="td">TD</option><option value="tp">TP</option><option value="devoir">Devoir surveillé</option></select></div>
+                <div class="col-md-8"><label class="form-label">Devoir prévu</label><input class="form-control" id="creneauDevoirInput" type="text" placeholder="Ex. DS1 Réseaux industriels d'automates programmables" /></div>
+                <div class="col-md-4"><label class="form-label">Date du devoir</label><input class="form-control" id="creneauDevoirDateInput" type="date" /></div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-light" type="button" data-bs-dismiss="modal">Fermer</button>
+              <button class="btn btn-primary" id="saveCreneauBtn" type="button">Enregistrer</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="exportEmploiModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Exporter l'emploi du temps</h5>
+              <button class="btn-close" type="button" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+              <div class="mb-3">
+                <label class="form-label">Portée</label>
+                <select class="form-select" id="exportScopeSelect">
+                  <option value="single">Une seule classe</option>
+                  <option value="all">Toutes les classes de la semaine</option>
+                </select>
+              </div>
+              <div class="mb-3" id="exportClasseField">
+                <label class="form-label">Classe</label>
+                <select class="form-select" id="exportClasseSelect"></select>
+              </div>
+              <div>
+                <label class="form-label">Semaine</label>
+                <input class="form-control" id="exportSemaineInput" type="date" value="2026-04-27" />
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-light" type="button" data-bs-dismiss="modal">Annuler</button>
+              <button class="btn btn-primary" id="exportEmploiBtn" type="button">Télécharger</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="qrModal" tabindex="-1">
+      <div class="modal-dialog modal-sm modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title"><i class="bi bi-qr-code me-2"></i>QR Code de la séance</h5>
+            <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Fermer"></button>
+          </div>
+          <div class="modal-body text-center" id="qrModalBody">
+            <div class="qr-modal-loading"><i class="bi bi-arrow-repeat"></i> Chargement...</div>
+          </div>
+          <div class="modal-footer justify-content-center">
+            <small class="text-muted" id="qrModalExpiry"></small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/qrcode.min.js"></script>
+    <script src="assets/js/api.js"></script>
+    <script src="assets/js/app.js"></script>
+  </body>
+</html>

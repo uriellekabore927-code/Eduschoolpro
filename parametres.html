@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EduSchedule Pro | Paramètres</title>
+    <link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/vendor/bootstrap-icons/font/bootstrap-icons.min.css" />
+    <link rel="stylesheet" href="assets/css/style.css?v=4" />
+    <link rel="stylesheet" href="assets/css/theme.css" />
+  </head>
+  <body class="app-shell" data-page="parametres">
+    <div data-app-shell></div>
+    <div data-page-content class="d-none">
+      <div class="row g-4">
+        <div class="col-xl-3">
+          <div class="surface-card">
+            <div class="nav flex-column nav-pills settings-nav gap-2" role="tablist">
+              <button class="nav-link active" data-bs-toggle="pill" data-bs-target="#tab-annees" type="button"><i class="bi bi-calendar me-2"></i>Année académique</button>
+              <button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab-classes" type="button"><i class="bi bi-people me-2"></i>Classes</button>
+              <button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab-matieres" type="button"><i class="bi bi-book me-2"></i>Matières</button>
+              <button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab-enseignants" type="button"><i class="bi bi-person-gear me-2"></i>Enseignants</button>
+              <button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab-salles" type="button"><i class="bi bi-door-open me-2"></i>Salles</button>
+              <button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab-roles" type="button"><i class="bi bi-shield-check me-2"></i>Rôles &amp; accès</button>
+              <button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab-signatures" type="button"><i class="bi bi-pen me-2"></i>Signatures</button>
+              <button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab-qr" type="button"><i class="bi bi-qr-code me-2"></i>Paramètres QR</button>
+              <button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab-vacations" type="button"><i class="bi bi-coin me-2"></i>Paramètres vacation</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xl-9">
+          <div class="surface-card">
+            <div class="tab-content">
+              <div class="tab-pane fade show active" id="tab-annees">
+                <div class="section-header">
+                  <div>
+                    <h2>Années académiques</h2>
+                    <p>Référentiel annuel utilisé dans toute l’application.</p>
+                  </div>
+                </div>
+                <div class="page-toolbar">
+                  <div class="toolbar-filters">
+                    <input class="form-control" id="anneesFilterInput" type="text" placeholder="Filtrer les années" />
+                  </div>
+                  <div class="toolbar-actions">
+                    <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#anneeFormPanel"><i class="bi bi-plus me-1"></i>Ajouter</button>
+                  </div>
+                </div>
+                <div class="collapse show mb-4" id="anneeFormPanel">
+                  <div class="form-panel">
+                  <div class="row g-3">
+                    <div class="col-md-4"><label class="form-label">Libellé</label><input class="form-control" id="anneeLibelleInput" value="2025-2026" /></div>
+                    <div class="col-md-3"><label class="form-label">Date début</label><input class="form-control" id="anneeDebutInput" type="date" value="2025-10-01" /></div>
+                    <div class="col-md-3"><label class="form-label">Date fin</label><input class="form-control" id="anneeFinInput" type="date" value="2026-07-31" /></div>
+                    <div class="col-md-2"><label class="form-label">Active</label><select class="form-select" id="anneeActiveInput"><option value="1">Oui</option><option value="0">Non</option></select></div>
+                  </div>
+                  <div class="mt-3"><button class="btn btn-primary" id="saveAnneeBtn" type="button"><i class="bi bi-floppy me-1"></i>Enregistrer l'année</button></div>
+                </div>
+                </div>
+                <div class="table-wrap">
+                  <table class="table align-middle">
+                    <thead>
+                      <tr><th>Année</th><th>Début</th><th>Fin</th><th>Statut</th><th>Action</th></tr>
+                    </thead>
+                    <tbody id="anneesTableBody"></tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div class="tab-pane fade" id="tab-classes">
+                <div class="section-header">
+                  <div>
+                    <h2>Classes</h2>
+                    <p>Classes utilisées dans l’emploi du temps et les affectations.</p>
+                  </div>
+                </div>
+                <div class="page-toolbar">
+                  <div class="toolbar-filters">
+                    <input class="form-control" id="classesFilterInput" type="text" placeholder="Filtrer les classes" />
+                  </div>
+                  <div class="toolbar-actions">
+                    <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#classeFormPanel"><i class="bi bi-plus me-1"></i>Ajouter</button>
+                  </div>
+                </div>
+                <div class="collapse show mb-4" id="classeFormPanel">
+                  <div class="form-panel">
+                  <div class="row g-3">
+                    <div class="col-md-3"><label class="form-label">Code</label><input class="form-control" id="classeCodeInput" value="L2-INFO" /></div>
+                    <div class="col-md-5"><label class="form-label">Libellé</label><input class="form-control" id="classeLibelleInput" value="Licence 2 Informatique" /></div>
+                    <div class="col-md-2"><label class="form-label">Niveau</label><select class="form-select" id="classeNiveauInput"><option>L1</option><option>L2</option><option>L3</option><option>IC1</option><option>IC2</option><option>IC3</option></select></div>
+                    <div class="col-md-2"><label class="form-label">Année</label><select class="form-select" id="classeAnneeSelect"></select></div>
+                  </div>
+                  <div class="mt-3"><button class="btn btn-primary" id="saveClasseBtn" type="button"><i class="bi bi-floppy me-1"></i>Enregistrer la classe</button></div>
+                </div>
+                </div>
+                <div class="table-wrap">
+                  <table class="table align-middle">
+                    <thead>
+                      <tr><th>Code</th><th>Libellé</th><th>Niveau</th><th>Année</th><th>Statut</th><th>Action</th></tr>
+                    </thead>
+                    <tbody id="classesTableBody"></tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div class="tab-pane fade" id="tab-matieres">
+                <div class="section-header">
+                  <div>
+                    <h2>Matières / Cours</h2>
+                    <p>Matières associées aux classes avec volume et coefficient.</p>
+                  </div>
+                </div>
+                <div class="page-toolbar">
+                  <div class="toolbar-filters">
+                    <input class="form-control" id="matieresFilterInput" type="text" placeholder="Filtrer les matières" />
+                  </div>
+                  <div class="toolbar-actions">
+                    <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#matiereFormPanel"><i class="bi bi-plus me-1"></i>Ajouter</button>
+                  </div>
+                </div>
+                <div class="collapse show mb-4" id="matiereFormPanel">
+                  <div class="form-panel">
+                  <div class="row g-3">
+                    <div class="col-md-2"><label class="form-label">Code</label><input class="form-control" id="matiereCodeInput" value="BD101" /></div>
+                    <div class="col-md-4"><label class="form-label">Libellé</label><input class="form-control" id="matiereLibelleInput" value="Base de données" /></div>
+                    <div class="col-md-3"><label class="form-label">Volume horaire total</label><input class="form-control" id="matiereVolumeInput" value="45" /></div>
+                    <div class="col-md-3"><label class="form-label">Coefficient</label><input class="form-control" id="matiereCoeffInput" value="3" /></div>
+                    <div class="col-md-6"><label class="form-label">Classe associée</label><select class="form-select" id="matiereClasseSelect"></select></div>
+                  </div>
+                  <div class="mt-3"><button class="btn btn-primary" id="saveMatiereBtn" type="button"><i class="bi bi-floppy me-1"></i>Enregistrer la matière</button></div>
+                </div>
+                </div>
+                <div class="table-wrap">
+                  <table class="table align-middle">
+                    <thead>
+                      <tr><th>Code</th><th>Matière</th><th>Volume</th><th>Coef.</th><th>Classes</th><th>Action</th></tr>
+                    </thead>
+                    <tbody id="matieresTableBody"></tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div class="tab-pane fade" id="tab-enseignants">
+                <div class="section-header">
+                  <div>
+                    <h2>Enseignants</h2>
+                    <p>Référentiel des enseignants utilisé partout dans le système.</p>
+                  </div>
+                </div>
+                <div class="page-toolbar">
+                  <div class="toolbar-filters">
+                    <input class="form-control" id="enseignantsFilterInput" type="text" placeholder="Filtrer les enseignants" />
+                  </div>
+                  <div class="toolbar-actions">
+                    <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#enseignantFormPanel"><i class="bi bi-plus me-1"></i>Ajouter</button>
+                  </div>
+                </div>
+                <div class="collapse show mb-4" id="enseignantFormPanel">
+                  <div class="form-panel">
+                  <div class="row g-3">
+                    <div class="col-md-2"><label class="form-label">Matricule</label><input class="form-control" id="enseignantMatriculeInput" value="ENS010" /></div>
+                    <div class="col-md-2"><label class="form-label">Nom</label><input class="form-control" id="enseignantNomInput" value="NOM" /></div>
+                    <div class="col-md-2"><label class="form-label">Prénom</label><input class="form-control" id="enseignantPrenomInput" value="Prénom" /></div>
+                    <div class="col-md-3"><label class="form-label">Email</label><input class="form-control" id="enseignantEmailInput" value="user@eduschedule.local" /></div>
+                    <div class="col-md-3"><label class="form-label">Téléphone</label><input class="form-control" id="enseignantTelephoneInput" value="70000000" /></div>
+                    <div class="col-md-4"><label class="form-label">Spécialité</label><input class="form-control" id="enseignantSpecialiteInput" value="Spécialité" /></div>
+                    <div class="col-md-4"><label class="form-label">Statut</label><select class="form-select" id="enseignantStatutInput"><option value="permanent">Permanent</option><option value="vacataire">Vacataire</option></select></div>
+                    <div class="col-md-4"><label class="form-label">Taux horaire</label><input class="form-control" id="enseignantTauxInput" value="5000" /></div>
+                  </div>
+                  <div class="mt-3"><button class="btn btn-primary" id="saveEnseignantBtn" type="button"><i class="bi bi-floppy me-1"></i>Enregistrer l'enseignant</button></div>
+                </div>
+                </div>
+                <div class="table-wrap">
+                  <table class="table align-middle">
+                    <thead>
+                      <tr><th>Matricule</th><th>Nom</th><th>Spécialité</th><th>Statut</th><th>Taux horaire</th><th>Action</th></tr>
+                    </thead>
+                    <tbody id="enseignantsTableBody"></tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div class="tab-pane fade" id="tab-salles">
+                <div class="section-header">
+                  <div>
+                    <h2>Salles</h2>
+                    <p>Salles utilisées dans les créneaux et la détection de conflits.</p>
+                  </div>
+                </div>
+                <div class="page-toolbar">
+                  <div class="toolbar-filters">
+                    <input class="form-control" id="sallesFilterInput" type="text" placeholder="Filtrer les salles" />
+                  </div>
+                  <div class="toolbar-actions">
+                    <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#salleFormPanel"><i class="bi bi-plus me-1"></i>Ajouter</button>
+                  </div>
+                </div>
+                <div class="collapse show mb-4" id="salleFormPanel">
+                  <div class="form-panel">
+                  <div class="row g-3">
+                    <div class="col-md-2"><label class="form-label">Code</label><input class="form-control" id="salleCodeInput" value="S105" /></div>
+                    <div class="col-md-3"><label class="form-label">Libellé</label><input class="form-control" id="salleLibelleInput" value="Salle 105" /></div>
+                    <div class="col-md-2"><label class="form-label">Capacité</label><input class="form-control" id="salleCapaciteInput" value="40" /></div>
+                    <div class="col-md-2"><label class="form-label">Bâtiment</label><input class="form-control" id="salleBatimentInput" value="Bloc A" /></div>
+                    <div class="col-md-3"><label class="form-label">Équipements</label><input class="form-control" id="salleEquipementsInput" value="Projecteur" /></div>
+                  </div>
+                  <div class="mt-3"><button class="btn btn-primary" id="saveSalleBtn" type="button"><i class="bi bi-floppy me-1"></i>Enregistrer la salle</button></div>
+                </div>
+                </div>
+                <div class="table-wrap">
+                  <table class="table align-middle">
+                    <thead>
+                      <tr><th>Code</th><th>Libellé</th><th>Capacité</th><th>Bâtiment</th><th>Équipements</th><th>Action</th></tr>
+                    </thead>
+                    <tbody id="sallesTableBody"></tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div class="tab-pane fade" id="tab-roles">
+                <div class="section-header">
+                  <div>
+                    <h2>Rôles et accès</h2>
+                    <p>Définissez d’abord les rôles et leurs accès, puis affectez simplement un rôle aux utilisateurs.</p>
+                  </div>
+                </div>
+                <div class="page-toolbar">
+                  <div class="toolbar-filters">
+                    <input class="form-control" id="rolesFilterInput" type="text" placeholder="Filtrer les rôles" />
+                  </div>
+                  <div class="toolbar-actions">
+                    <button class="btn btn-primary" id="openRoleFormBtn" type="button" data-bs-toggle="collapse" data-bs-target="#roleFormPanel"><i class="bi bi-plus me-1"></i>Ajouter</button>
+                  </div>
+                </div>
+                <div class="collapse show mb-4" id="roleFormPanel">
+                  <div class="form-panel">
+                  <div class="row g-3">
+                    <div class="col-md-3"><label class="form-label">Code rôle</label><input class="form-control" id="roleCodeInput" placeholder="ex. coordinateur" /></div>
+                    <div class="col-md-5"><label class="form-label">Libellé</label><input class="form-control" id="roleLibelleInput" placeholder="ex. Coordinateur pédagogique" /></div>
+                    <div class="col-md-4"><label class="form-label">Actif</label><select class="form-select" id="roleActiveInput"><option value="1">Oui</option><option value="0">Non</option></select></div>
+                    <div class="col-12">
+                      <label class="form-label">Accès du rôle</label>
+                      <div class="row g-2">
+                        <div class="col-md-3"><div class="form-check"><input class="form-check-input role-permission-check" type="checkbox" value="dashboard" id="rolePermDashboard"><label class="form-check-label" for="rolePermDashboard">Dashboard</label></div></div>
+                        <div class="col-md-3"><div class="form-check"><input class="form-check-input role-permission-check" type="checkbox" value="utilisateurs" id="rolePermUsers"><label class="form-check-label" for="rolePermUsers">Utilisateurs</label></div></div>
+                        <div class="col-md-3"><div class="form-check"><input class="form-check-input role-permission-check" type="checkbox" value="parametres" id="rolePermParams"><label class="form-check-label" for="rolePermParams">Paramètres</label></div></div>
+                        <div class="col-md-3"><div class="form-check"><input class="form-check-input role-permission-check" type="checkbox" value="emploi_temps" id="rolePermPlanning"><label class="form-check-label" for="rolePermPlanning">Emploi du temps</label></div></div>
+                        <div class="col-md-3"><div class="form-check"><input class="form-check-input role-permission-check" type="checkbox" value="pointage" id="rolePermPointage"><label class="form-check-label" for="rolePermPointage">Pointage</label></div></div>
+                        <div class="col-md-3"><div class="form-check"><input class="form-check-input role-permission-check" type="checkbox" value="cahiers" id="rolePermCahiers"><label class="form-check-label" for="rolePermCahiers">Cahier de texte</label></div></div>
+                        <div class="col-md-3"><div class="form-check"><input class="form-check-input role-permission-check" type="checkbox" value="vacations" id="rolePermVacations"><label class="form-check-label" for="rolePermVacations">Vacations</label></div></div>
+                        <div class="col-md-3"><div class="form-check"><input class="form-check-input role-permission-check" type="checkbox" value="rapports" id="rolePermRapports"><label class="form-check-label" for="rolePermRapports">Rapports</label></div></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="mt-3"><button class="btn btn-primary" id="saveRoleBtn" type="button"><i class="bi bi-floppy me-1"></i>Enregistrer le rôle</button></div>
+                </div>
+                </div>
+                <div class="table-wrap">
+                  <table class="table align-middle">
+                    <thead>
+                      <tr><th>Code</th><th>Libellé</th><th>Accès</th><th>Utilisateurs</th><th>Statut</th><th>Action</th></tr>
+                    </thead>
+                    <tbody id="rolesTableBody"></tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div class="tab-pane fade" id="tab-signatures">
+                <div class="section-header">
+                  <div>
+                    <h2>Chaîne de signatures</h2>
+                    <p>Ordre de validation des cahiers et des vacations.</p>
+                  </div>
+                </div>
+                <div class="page-toolbar">
+                  <div class="toolbar-filters">
+                    <input class="form-control" id="signatureRulesFilterInput" type="text" placeholder="Filtrer les règles de signature" />
+                  </div>
+                  <div class="toolbar-actions">
+                    <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#signatureFormPanel"><i class="bi bi-plus me-1"></i>Ajouter</button>
+                  </div>
+                </div>
+                <div class="collapse show mb-4" id="signatureFormPanel">
+                  <div class="form-panel">
+                  <div class="row g-3">
+                    <div class="col-md-3"><label class="form-label">Document</label><select class="form-select" id="signatureDocumentSelect"><option value="cahier">Cahier</option><option value="vacation">Vacation</option></select></div>
+                    <div class="col-md-3"><label class="form-label">Rôle signataire</label><select class="form-select" id="signatureRoleSelect"><option value="delegue">Délégué</option><option value="enseignant">Enseignant</option><option value="surveillant">Surveillant</option><option value="comptable">Comptable</option><option value="administrateur">Administrateur</option></select></div>
+                    <div class="col-md-2"><label class="form-label">Ordre</label><input class="form-control" id="signatureOrderInput" value="1" /></div>
+                    <div class="col-md-2"><label class="form-label">Obligatoire</label><select class="form-select" id="signatureRequiredInput"><option value="1">Oui</option><option value="0">Non</option></select></div>
+                    <div class="col-md-2"><label class="form-label">Actif</label><select class="form-select" id="signatureActiveInput"><option value="1">Oui</option><option value="0">Non</option></select></div>
+                  </div>
+                  <div class="mt-3"><button class="btn btn-primary" id="saveSignatureRuleBtn" type="button"><i class="bi bi-floppy me-1"></i>Enregistrer la règle</button></div>
+                </div>
+                </div>
+                <div class="table-wrap">
+                  <table class="table align-middle">
+                    <thead>
+                      <tr><th>Document</th><th>Rôle</th><th>Ordre</th><th>Obligatoire</th><th>Statut</th><th>Action</th></tr>
+                    </thead>
+                    <tbody id="signatureRulesBody"></tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div class="tab-pane fade" id="tab-qr">
+                <div class="section-header">
+                  <div>
+                    <h2>Paramètres QR Code</h2>
+                    <p>Fenêtres de validité des QR Codes de séance.</p>
+                  </div>
+                </div>
+                <div class="form-panel">
+                  <div class="row g-3">
+                    <div class="col-md-4"><label class="form-label">Durée de validité QR</label><select class="form-select"><option>15 minutes</option><option>20 minutes</option></select></div>
+                    <div class="col-md-4"><label class="form-label">Tolérance avant séance</label><select class="form-select"><option>15 minutes</option></select></div>
+                    <div class="col-md-4"><label class="form-label">Tolérance après séance</label><select class="form-select"><option>15 minutes</option></select></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="tab-pane fade" id="tab-vacations">
+                <div class="section-header">
+                  <div>
+                    <h2>Paramètres vacation</h2>
+                    <p>Références financières utilisées pour le calcul des fiches.</p>
+                  </div>
+                </div>
+                <div class="form-panel">
+                  <div class="row g-3">
+                    <div class="col-md-4"><label class="form-label">Taux horaire par défaut</label><input class="form-control" value="5 000" /></div>
+                    <div class="col-md-4"><label class="form-label">Retenues</label><input class="form-control" value="10" /></div>
+                    <div class="col-md-4"><label class="form-label">Devise</label><select class="form-select"><option>FCFA</option></select></div>
+                    <div class="col-12"><label class="form-label">Règle métier</label><textarea class="form-control" rows="4">Une vacation ne peut être validée que si toutes les séances du mois sont clôturées et signées.</textarea></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/api.js"></script>
+    <script src="assets/js/app.js"></script>
+  </body>
+</html>
